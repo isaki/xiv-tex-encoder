@@ -202,7 +202,7 @@ namespace
         // header.arraySize = static_cast<uint8_t>(arraySizeHost);
         // NOTE: since we memset 0, we can just leave this alone.
 
-        memset(&header, 0, sizeof(xte::XIVTexHeader));
+        std::memset(&header, 0, sizeof(xte::XIVTexHeader));
 
         header.type = write_xiv_header_enum(xte::XIVTexAttribute::Texture2D);
         header.format = write_xiv_header_enum(format);
