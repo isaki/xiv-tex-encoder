@@ -119,7 +119,8 @@ int main(int argc, char ** argv)
                 return 3;
             }
 
-            texFile = build_tex_file_path(ddsFile, std::optional<fs::path>(outputDir));
+            const std::optional o(outputDir);
+            texFile = build_tex_file_path(ddsFile, o);
         }
         else
         {
