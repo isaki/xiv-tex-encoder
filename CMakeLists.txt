@@ -7,7 +7,7 @@ project(
     XIV-Texture-Encoder
     VERSION 1.0.0
     LANGUAGES CXX
-    HOMEPAGE_URL "https://github.com/isaki/XIV-Texture-Encoder")
+    HOMEPAGE_URL "https://github.com/isaki/xiv-texture-encoder")
 
 # Configure C++20
 set(CMAKE_CXX_STANDARD 20)

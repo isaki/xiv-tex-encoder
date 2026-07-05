@@ -12,6 +12,7 @@
 #include <fstream>
 
 #include <algorithm>
+#include <utility>      // std::move
 #include <optional>
 
 // Endian support is shimmed for cross OS support
