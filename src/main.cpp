@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
 
         po::options_description hidden("Hidden options");
         hidden.add_options()
-            ("dds", po::value<std::string>(), "The file A to diff")
+            ("dds", po::value<std::string>(), "The DDS file to convert")
         ;
 
         po::options_description all;
