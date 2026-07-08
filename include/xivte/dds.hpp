@@ -14,10 +14,6 @@ namespace isaki::xivte
     inline constexpr char DDS_MAGIC[] = { 'D', 'D', 'S', ' ' };
 
     // Pulled from M$'s documentation
-    // We do NOT care about endianness (though these are 32bit LE)
-    // Reason being we write and read them as they come in via char
-    // buffers, as long as we don't do math on them or anything, we
-    // can treat them as opaque blocks of data.
 
     // These are DDS_PIXELFORMAT.fourCC values
     inline constexpr uint32_t DDS_DXT1 = 0x31545844;    // BC1
