@@ -63,9 +63,9 @@ int main(int argc, char ** argv)
         // Declare the supported options.
         po::options_description desc("Options");
         desc.add_options()
-            ("help,h", "print this message message")
-            ("version,v", "display version information")
-            ("output-dir", po::value<std::string>(), "Optional directory to output the TEX file to")
+            ("help,h", "Print this message.")
+            ("version,v", "Display version information.")
+            ("output-dir", po::value<std::string>(), "Optional directory to output the TEX file to.")
         ;
 
         po::options_description hidden("Hidden options");
