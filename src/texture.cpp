@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <utility>
 #include <type_traits>
+#include <limits>
 
 #include <fstream>
 
@@ -32,6 +33,10 @@ namespace
     // on a big-endian system, so conversions are required.
     constexpr std::uint32_t CHANNEL_0 = 0x000000FF;
     constexpr std::uint32_t CHANNEL_2 = 0x00FF0000;
+
+    // Will the file fit in memory? This is an insanely large value and should
+    // never happen, but it's good to be careful.
+    constexpr std::uintmax_t MAX_SIZE_T = std::numeric_limits<std::size_t>::max();
 
     constexpr std::uint32_t write_xiv_header(const std::uint32_t headerValue) noexcept
     {
@@ -277,6 +282,12 @@ xte::Texture::Texture(const fs::path& ddsFile) :
 
     try
     {
+        const std::uintmax_t fileSize = fs::file_size(ddsFile);
+        if (fileSize > MAX_SIZE_T)
+        {
+            throw std::runtime_error("File too large to load");
+        }
+
         std::ifstream is;
         is.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
@@ -308,20 +319,15 @@ xte::Texture::Texture(const fs::path& ddsFile) :
         {
             throw std::runtime_error("Failed to determine texture data start");
         }
-
-        is.seekg(0, std::ios::end);
-        const std::ifstream::pos_type dataEnd = is.tellg();
-        if (dataEnd == static_cast<std::ifstream::pos_type>(-1))
+        else if (fileSize < static_cast<std::uintmax_t>(dataStart))
         {
-            throw std::runtime_error("Failed to determine texture data end");
+            // This means something went wrong, maybe modified as we read
+            throw std::runtime_error("Header length is longer than file size");
         }
-
-        is.clear();
-        is.seekg(dataStart);
 
         // Size of data, dataStart is 0, and dataEnd is 1 past the last byte.
         // Thus, no need to add 1.
-        dataLength = static_cast<std::size_t>(dataEnd - dataStart);
+        dataLength = static_cast<std::size_t>(fileSize) - static_cast<std::size_t>(dataStart);
         tmp = new char[dataLength];
 
         is.read(tmp, dataLength);
