@@ -51,7 +51,7 @@ namespace
 
     void print_help(std::ostream& os, const std::string_view name, const po::options_description& desc)
     {
-        os << name << " <file.dds>" << std::endl << std::endl;
+        os << name << " <file.dds>\n" << std::endl;
         os << desc << std::endl;
     }
 }
