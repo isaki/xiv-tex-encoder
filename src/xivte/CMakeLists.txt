@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Copyright 2025-2026 isaki
 
+include(IsakiStrip)
+
 # Include Boost
 set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost REQUIRED COMPONENTS program_options)
@@ -17,3 +19,5 @@ target_include_directories(xiv-tex-encode
 )
 
 target_link_libraries(xiv-tex-encode PRIVATE Boost::program_options xivCore)
+
+isaki_strip(xiv-tex-encode)
