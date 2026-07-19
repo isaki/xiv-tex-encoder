@@ -1,6 +1,12 @@
 # README
 
+## XIV Tools
+
+### xiv-tex-encode
 A simple tool for converting common DDS formats into FFXIV tex files.
+
+### xiv-phyb
+A tool for reading and modifying PhyB files.
 
 ## Operating System Support
 - Linux
